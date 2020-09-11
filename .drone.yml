@@ -11,4 +11,4 @@ steps:
   - name: fr
     image: alpine
     commands:
-      - echo bonjour monde new
+      - echo bonjour monde
