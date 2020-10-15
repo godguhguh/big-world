@@ -30,4 +30,9 @@ public class HomeController {
     public String currentDate(){
         return LocalDateTime.now().toString();
     }
+
+    @RequestMapping("/now1")
+    public String currentDate1(){
+        return LocalDateTime.now().toString();
+    }
 }
