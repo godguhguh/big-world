@@ -1,5 +1,6 @@
 package com.ypp.tunte.world.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(){
-        return "welcome to big world!";
+        return "welcome to big world!" + RandomUtil.randomString(3);
     }
 
 
