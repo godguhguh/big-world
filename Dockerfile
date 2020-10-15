@@ -13,7 +13,7 @@ RUN java -Djarmode=layertools -jar application.jar extract
 FROM openjdk:8u212-jdk-stretch
 MAINTAINER hello@163.com
 WORKDIR application
-EXPOSE 3000
+EXPOSE 9527
 # 前一阶段从jar中提取除了多个文件，这里分别执行COPY命令复制到镜像空间中，每次COPY都是一个layer
 COPY --from=builder application/dependencies/ ./
 COPY --from=builder application/spring-boot-loader/ ./
