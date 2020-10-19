@@ -9,6 +9,14 @@ WORKDIR /keyu4cloud-auth
 ARG JAR_FILE=target/*.jar
 # 将编译构建得到的jar文件复制到镜像空间中
 COPY ${JAR_FILE} application.jar
+
+
+RUN apk add tzdata && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone && \
+    apk del tzdata
+
+
 # 通过工具spring-boot-jarmode-layertools从application.jar中提取拆分后的构建结果
 RUN java -Djarmode=layertools -jar application.jar extract
 
