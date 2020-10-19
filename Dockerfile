@@ -1,5 +1,5 @@
 # 指定基础镜像，这是分阶段构建的前期阶段
-FROM ascdc/jdk8:latest as builder
+FROM fabric8/java-jboss-openjdk8-jdk:latest as builder
 
 RUN mkdir -p /keyu4cloud-auth
 
@@ -16,7 +16,7 @@ COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
 # 正式构建镜像
-FROM ascdc/jdk8:latest
+FROM fabric8/java-jboss-openjdk8-jdk:latest
 MAINTAINER 785780@163.com
 WORKDIR /keyu4cloud-auth
 EXPOSE 9527
