@@ -1,7 +1,10 @@
 # 指定基础镜像，这是分阶段构建的前期阶段
-FROM fabric8/java-jboss-openjdk8-jdk:latest as builder
+FROM openjdk:8-jdk-alpine as builder
 
-RUN mkdir -p /keyu4cloud-auth
+RUN mkdir -p /keyu4cloud-auth \
+    && apk add tzdata \
+    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone
 
 # 执行工作目录
 WORKDIR /keyu4cloud-auth
@@ -16,7 +19,7 @@ COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
 # 正式构建镜像
-FROM fabric8/java-jboss-openjdk8-jdk:latest
+FROM openjdk:8-jdk-alpine
 MAINTAINER 785780@163.com
 WORKDIR /keyu4cloud-auth
 EXPOSE 9527
