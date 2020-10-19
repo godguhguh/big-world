@@ -1,5 +1,5 @@
 # 指定基础镜像，这是分阶段构建的前期阶段
-FROM openjdk:8-jdk-alpine as builder
+FROM ascdc/jdk8:latest as builder
 
 RUN mkdir -p /keyu4cloud-auth
 
@@ -11,14 +11,12 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
 
 
-ENV TZ=Asia/Shanghai
-
 
 # 通过工具spring-boot-jarmode-layertools从application.jar中提取拆分后的构建结果
 RUN java -Djarmode=layertools -jar application.jar extract
 
 # 正式构建镜像
-FROM openjdk:8-jdk-alpine
+FROM ascdc/jdk8:latest
 MAINTAINER 785780@163.com
 WORKDIR /keyu4cloud-auth
 EXPOSE 9527
