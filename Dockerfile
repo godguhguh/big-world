@@ -11,10 +11,7 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
 
 
-RUN apk add tzdata && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone && \
-    apk del tzdata
+ENV TZ=Asia/Shanghai
 
 
 # 通过工具spring-boot-jarmode-layertools从application.jar中提取拆分后的构建结果
